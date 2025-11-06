@@ -1,0 +1,75 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 420
+  compression:
+    enabled: true
+    mime-types: application/json,text/html
+    min-response-size: 1024
+  tomcat:
+    threads:
+      max: 200             # Max concurrent requests handled by Tomcat
+      min-spare: 30        # Minimum idle threads
+    accept-count: 1000     # Queue before rejecting
+    connection-timeout: 5000  # 5 seconds
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://trustlypay-mysqldb001.c5iismwgg2g4.ap-south-1.rds.amazonaws.com:3306/trustlypay_db?serverTimezone=Asia/Kolkata
+#    username: admin
+#    password: Trustlypay$2025$$
+
+    url: jdbc:mysql://localhost:3306/trustlypay_db?createDatabaseIfNotExist=true&serverTimezone=Asia/Kolkata
+    username: root
+    password: Nanditha1301
+    hikari:
+      minimumIdle: 10
+      maximumPoolSize: 40        # Adjust based on CPU cores (? 2x cores)
+      idleTimeout: 60000         # 1 min
+      connectionTimeout: 15000   # 15 sec max wait for DB
+      maxLifetime: 600000        # 10 min (avoid stale RDS connections)
+      leakDetectionThreshold: 10000  # Detect stuck connections
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+    open-in-view: false
+
+  mvc:
+    async:
+      request-timeout: 0 # Allow long async WebClient calls without 30s cutoff
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,threaddump
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.zaxxer.hikari: WARN
+    reactor.netty.http.client: INFO
+    com.trustlypay.gateway: DEBUG
+  file:
+    name: logs/trustlypay-gateway.log
+
+session:
+  timeout: 420
+
