@@ -17,13 +17,13 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://trustlypay-mysqldb001.c5iismwgg2g4.ap-south-1.rds.amazonaws.com:3306/trustlypay_db?serverTimezone=Asia/Kolkata
-#    username: admin
-#    password: Trustlypay$2025$$
+    url: jdbc:mysql://trustlypay-mysqldb001.c5iismwgg2g4.ap-south-1.rds.amazonaws.com:3306/trustlypay_db?serverTimezone=Asia/Kolkata
+    username: admin
+    password: Trustlypay$2025$$
 
-    url: jdbc:mysql://localhost:3306/trustlypay_db?createDatabaseIfNotExist=true&serverTimezone=Asia/Kolkata
-    username: root
-    password: Nanditha1301
+#    url: jdbc:mysql://localhost:3306/trustlypay_db?createDatabaseIfNotExist=true&serverTimezone=Asia/Kolkata
+#    username: root
+#    password: Nanditha1301
     hikari:
       minimumIdle: 10
       maximumPoolSize: 40        # Adjust based on CPU cores (? 2x cores)
